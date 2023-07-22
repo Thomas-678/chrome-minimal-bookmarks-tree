@@ -146,6 +146,9 @@
     "optionSuperClickAction": {
         "message": "On ctrl\/option + click, open bookmark in"
     },
+    "optionOpenTabsDelay": {
+        "message": "Time delay between opening tabs"
+    },
     "optionClickActionCurrent": {
         "message": "Current tab"
     },

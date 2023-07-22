@@ -1,5 +1,6 @@
 import BookmarkTreeNode = chrome.bookmarks.BookmarkTreeNode;
 import Tab = chrome.tabs.Tab;
+import {SettingsFactory} from '../common/settings/SettingsFactory';
 
 export enum BookmarkOpeningDisposition {
   activeTab,
@@ -9,7 +10,9 @@ export enum BookmarkOpeningDisposition {
   newIncognitoWindow
 }
 
+const settings = SettingsFactory.create();
 export class BookmarkOpener {
+
   static open(url: string, disposition: BookmarkOpeningDisposition): Promise<void> {
     return new Promise((resolve, reject) => {
       switch (disposition) {
@@ -75,16 +78,26 @@ export class BookmarkOpener {
     }
 
     const urls = this.getAllBookmarkUrlsInFolder(folder);
+    const urlsLength = urls.length;
 
     let disposition = BookmarkOpeningDisposition.activeTab;
     if (startWithNewTab) {
       disposition = BookmarkOpeningDisposition.backgroundTab;
     }
 
+    const openTabDelay = settings.getNumber("open_tabs_delay");
     this.open(urls[0], disposition);
 
-    urls.slice(1).forEach((bookmark: string) => {
-      this.open(bookmark, BookmarkOpeningDisposition.backgroundTab);
+    urls.slice(1).forEach((bookmark: string, index: number) => {
+      if (openTabDelay > 0) {
+        setTimeout(() => {
+          this.open(bookmark, BookmarkOpeningDisposition.backgroundTab);
+          if (index + 2 == urlsLength)
+            window.close();
+        }, (index+1)*openTabDelay)
+      } else {
+        this.open(bookmark, BookmarkOpeningDisposition.backgroundTab);
+      }
     });
   }
 

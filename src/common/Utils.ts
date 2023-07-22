@@ -18,7 +18,7 @@ export class Utils {
   static openAllBookmarks(folderId: string): void {
     chrome.bookmarks.getSubTree(folderId, (data: BookmarkTreeNode[]) => {
       BookmarkOpener.openAll(data[0], true);
-      window.close();
+      //window.close();
     });
   }
 

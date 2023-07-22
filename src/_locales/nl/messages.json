@@ -146,6 +146,9 @@
     "optionSuperClickAction": {
         "message": "Bij ctrl\/option + klik, open bladwijzer in"
     },
+    "optionOpenTabsDelay": {
+        "message": "Tijdvertraging tussen openende tabbladen"
+    },
     "optionClickActionCurrent": {
         "message": "Huidige tab"
     },

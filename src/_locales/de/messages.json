@@ -146,6 +146,9 @@
     "optionSuperClickAction": {
         "message": "Bei einem Strg\/Option + Klick \u00f6ffnen Lesezeichen in"
     },
+    "optionOpenTabsDelay": {
+        "message": "Zeitverzögerung zwischen dem Öffnen von Tabs"
+    },
     "optionClickActionCurrent": {
         "message": "Aktueller Tab"
     },
